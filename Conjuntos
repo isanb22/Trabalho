@@ -1,0 +1,62 @@
+#Aluna: Isabela Navarro Benedetti. Turma 2B BCC
+
+#Abre o arquivo
+f = open('arquivo1.txt', 'r')
+desafio = f.read()
+f.close()
+
+# Matriz:
+desafio_temp = desafio.split('\n')
+txt = []
+for i in range(len(desafio_temp)):
+    temp = desafio_temp[i].split(", ")
+    txt.append(temp)
+
+RI = []
+RD = []
+RC = []
+
+# Identificando o comando
+for i in range(1, len(txt), 3):
+    comando = txt[i][0]
+    linhaI = txt[i + 1]
+    linhaII = txt[i + 2]
+
+
+    # União U
+    if comando == 'U':
+        RU = linhaI
+        for f in range(len(linhaII)):
+            if txt[i + 2][f] in RU:
+                pass
+            else:
+                RU.append(txt[i + 2][f])
+        print('União: Conjunto 1 {',str(linhaI)[1:-1],'}Conjunto 2 {', str(linhaII)[1:-1],'}. Resultado: {',str(RU)[1:-1], '}')
+
+
+    # Interseção I
+    elif comando == 'I':
+        for l in range(len(linhaI)):
+            for x in range(len(linhaII)):
+                if txt[i + 1][l] == txt[i + 2][x]:
+                    RI.append(txt[i + 2][x])
+        print('Interseção: Conjunto 1 {',str(linhaI)[1:-1],'} Conjunto 2 {',str(linhaII)[1:-1], '}. Resultado: {', str(RI)[1:-1], '}')
+
+
+    # Diferença D
+    elif comando == 'D':
+        for c in range(len(linhaI)):
+            if txt[i + 1][c] not in txt[i + 2]:
+                RD.append(txt[i + 1][c])
+                RD_str = str(RD)[1:-1]
+        print('Diferença: Conjunto 1 {', str(linhaI)[1:-1],'} Conjunto 2 {',str(linhaII)[1:-1],'}. Resultado: {',str(RD)[1:-1],'}')
+
+
+    # Plano cartesiano C
+    elif comando == 'C':
+        for w in range(len(linhaI)):
+            for e in range(len(linhaII)):
+                temp = f"({txt[i + 1][w]};{txt[i + 2][e]})"
+                RC.append(temp)
+                RC_str = str(RC)[1:-1]
+        print('Plano Cartesiano: Conjunto 1 {',str(linhaI)[1:-1],'}, Conjunto 2 {',str(linhaII)[1:-1],'}. Resultado: {',str(RC)[1:-1],'}')
